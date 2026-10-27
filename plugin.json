@@ -1,0 +1,9 @@
+{
+  "id": "miaomiao-wooden-fish",
+  "name": "妙妙木鱼",
+  "version": "1.0.0",
+  "description": "DSH 右下角离线木鱼功德插件",
+  "entry": "index.html",
+  "license": "MIT",
+  "permissions": ["localStorage", "speechSynthesis"]
+}
