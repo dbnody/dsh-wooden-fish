@@ -1,0 +1,1 @@
+GitHub 即用版：上传此目录全部内容；发布前请把授权的 audio/wooden-fish.m4a 放入 audio 目录。
