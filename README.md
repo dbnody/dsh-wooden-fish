@@ -11,9 +11,13 @@
 
 悬浮层只有木鱼、语音和清零按钮响应点击，透明区域会把点击交给下面的 DSH 界面。
 
-## 安装到 DSH
+## 安装到 DSH 桌面端
 
-将整个插件目录放入 DSH 的插件目录，并加载 `index.html`（或按 DSH 的 HTML 插件入口配置填写 `plugin.json`）。如果 DSH 支持脚本注入，也可以把 `styles.css` 和 `app.js` 注入到页面。
+此仓库已包含 DSH 识别所需的 `package.json` 与 `cordis.patch.yml` 组合包声明。安装时在 DSH 的插件管理中填写 Git 仓库地址：
+
+`https://github.com/dbnody/dsh-wooden-fish`
+
+安装器会读取 `package.json` 中的 `dsh.bundle` 配置，并加载 `src/client.js`。不需要手动加载 `index.html`；它仅用于浏览器预览和构建客户端模块。
 
 ## 音频资源
 

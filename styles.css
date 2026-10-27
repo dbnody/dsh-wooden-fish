@@ -1,4 +1,4 @@
-:root {
+.mmwf-root {
   color-scheme: light;
   --mmwf-ink: #2a2623;
   --mmwf-muted: #857a71;
@@ -11,7 +11,7 @@
   --mmwf-shadow: rgba(55, 37, 23, .2);
 }
 
-html[data-theme="dark"], body.dark, body.dark-mode, .dark {
+.mmwf-root[data-mmwf-theme="dark"] {
   color-scheme: dark;
   --mmwf-ink: #f6f0e9;
   --mmwf-muted: #b7aca3;

@@ -10,7 +10,9 @@
   const STORAGE_KEY = 'dsh-miaomiao-wooden-fish-count';
   const SETTINGS_KEY = 'dsh-miaomiao-wooden-fish-settings';
   let count = Number.parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10) || 0;
-  let voiceOn = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{"voice":true}').voice !== false;
+  let settings;
+  try { settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{"voice":true}'); } catch (_) { settings = { voice: true }; }
+  let voiceOn = settings.voice !== false;
   let audio;
   let audioContext;
 
@@ -18,9 +20,10 @@
   function detectTheme() {
     const html = document.documentElement;
     const body = document.body;
-    const declared = html.dataset.theme || body.dataset.theme || '';
-    const dark = declared === 'dark' || /(^|\s)(dark|dark-mode)(\s|$)/.test(body.className) || window.matchMedia('(prefers-color-scheme: dark)').matches;
-    html.dataset.theme = dark ? 'dark' : 'light';
+    const declared = body.dataset.theme || html.dataset.theme || '';
+    const classes = html.className + ' ' + body.className;
+    const dark = declared === 'dark' || (!declared && /(^|\s)(dark|dark-mode)(\s|$)/.test(classes)) || (!declared && !/(^|\s)(light|light-mode)(\s|$)/.test(classes) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    root.dataset.mmwfTheme = dark ? 'dark' : 'light';
   }
   function showToast() {
     const toast = document.createElement('span');
