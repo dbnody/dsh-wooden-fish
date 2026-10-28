@@ -6,7 +6,6 @@
   const countEl = document.getElementById('mmwf-count');
   const toastLayer = root.querySelector('.mmwf-toast-layer');
   const resetButton = document.getElementById('mmwf-reset');
-  const dragHandle = document.getElementById('mmwf-drag-handle');
   const widget = root.querySelector('.mmwf-widget');
   const STORAGE_KEY = 'dsh-miaomiao-wooden-fish-count';
   const POSITION_KEY = 'dsh-miaomiao-wooden-fish-position';
@@ -71,28 +70,40 @@
     localStorage.setItem(POSITION_KEY, JSON.stringify({ x: Math.round(box.left), y: Math.round(box.top) }));
   }
   function beginDrag(event) {
+    if (event.target.closest('.mmwf-small-button')) return;
     if (event.button !== undefined && event.button !== 0) return;
     const box = widget.getBoundingClientRect();
-    dragState = { pointerId: event.pointerId, offsetX: event.clientX - box.left, offsetY: event.clientY - box.top, moved: false };
-    widget.classList.add('is-dragging');
-    dragHandle.setPointerCapture?.(event.pointerId);
+    dragState = {
+      pointerId: event.pointerId,
+      offsetX: event.clientX - box.left,
+      offsetY: event.clientY - box.top,
+      startX: event.clientX,
+      startY: event.clientY,
+      moved: false,
+      startedOnFish: fish.contains(event.target),
+    };
+    widget.setPointerCapture?.(event.pointerId);
     event.preventDefault();
   }
   function moveDrag(event) {
     if (!dragState || event.pointerId !== dragState.pointerId) return;
+    const movedEnough = Math.abs(event.clientX - dragState.startX) > 5 || Math.abs(event.clientY - dragState.startY) > 5;
+    if (!dragState.moved && !movedEnough) return;
+    dragState.moved = true;
+    widget.classList.add('is-dragging');
     const maxX = Math.max(12, window.innerWidth - widget.offsetWidth - 12);
     const maxY = Math.max(12, window.innerHeight - widget.offsetHeight - 12);
     widget.style.left = clamp(event.clientX - dragState.offsetX, 12, maxX) + 'px';
     widget.style.top = clamp(event.clientY - dragState.offsetY, 12, maxY) + 'px';
     widget.style.right = 'auto';
     widget.style.bottom = 'auto';
-    dragState.moved = true;
   }
   function endDrag(event) {
     if (!dragState || event.pointerId !== dragState.pointerId) return;
-    dragHandle.releasePointerCapture?.(event.pointerId);
+    widget.releasePointerCapture?.(event.pointerId);
     widget.classList.remove('is-dragging');
     if (dragState.moved) savePosition();
+    else if (dragState.startedOnFish) hit();
     dragState = undefined;
   }
   function hit() {
@@ -105,12 +116,11 @@
     playWoodenFish();
   }
 
-  fish.addEventListener('click', hit);
   resetButton.addEventListener('click', function () { count = 0; updateCount(); });
-  dragHandle.addEventListener('pointerdown', beginDrag);
-  dragHandle.addEventListener('pointermove', moveDrag);
-  dragHandle.addEventListener('pointerup', endDrag);
-  dragHandle.addEventListener('pointercancel', endDrag);
+  widget.addEventListener('pointerdown', beginDrag);
+  widget.addEventListener('pointermove', moveDrag);
+  widget.addEventListener('pointerup', endDrag);
+  widget.addEventListener('pointercancel', endDrag);
   const observer = new MutationObserver(detectTheme);
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
   observer.observe(document.body, { attributes: true, attributeFilter: ['class', 'data-theme'] });

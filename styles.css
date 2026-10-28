@@ -36,7 +36,8 @@
 .mmwf-count { min-width: 111px; padding: 8px 18px 7px; color: var(--mmwf-ink); background: var(--mmwf-panel); border: 1px solid var(--mmwf-panel-border); border-radius: 17px; box-shadow: 0 8px 28px var(--mmwf-shadow); text-align: center; backdrop-filter: blur(12px); }
 .mmwf-count-label { display: block; color: var(--mmwf-muted); font-size: 11px; letter-spacing: .18em; }
 .mmwf-count strong { display: block; margin-top: 2px; font-family: Georgia, "Times New Roman", serif; font-size: 24px; line-height: 1; letter-spacing: .04em; }
-.mmwf-fish { position: relative; width: 150px; height: 119px; padding: 0; border: 0; background: transparent; cursor: pointer; filter: drop-shadow(0 13px 11px var(--mmwf-shadow)); transform-origin: 69% 75%; transition: transform .14s ease; }
+.mmwf-fish { position: relative; width: 150px; height: 119px; padding: 0; border: 0; background: transparent; cursor: grab; filter: drop-shadow(0 13px 11px var(--mmwf-shadow)); transform-origin: 69% 75%; transition: transform .14s ease; }
+.mmwf-widget.is-dragging .mmwf-fish { cursor: grabbing; }
 .mmwf-fish:focus-visible { outline: 3px solid var(--mmwf-accent); outline-offset: 5px; border-radius: 40px; }
 .mmwf-aura { position: absolute; left: 2px; bottom: 6px; width: 112px; height: 87px; border-radius: 50%; background: radial-gradient(ellipse, color-mix(in srgb, var(--mmwf-wood-light) 28%, transparent) 0%, transparent 69%); opacity: .7; }
 .mmwf-fish-base { position: absolute; left: 15px; bottom: 5px; width: 94px; height: 19px; border-radius: 50%; background: linear-gradient(180deg, var(--mmwf-wood-light), var(--mmwf-wood-dark)); border: 3px solid var(--mmwf-wood-dark); transform: rotate(-6deg); }
