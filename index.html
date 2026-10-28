@@ -10,13 +10,19 @@
   <main id="dsh-wooden-fish" class="mmwf-root" aria-label="妙妙木鱼">
     <div class="mmwf-toast-layer" aria-live="polite"></div>
     <section class="mmwf-widget" aria-label="木鱼计数器">
+      <button id="mmwf-drag-handle" class="mmwf-drag-handle" type="button" aria-label="拖动木鱼" title="按住拖动木鱼">
+        <span aria-hidden="true">⠿</span><span>拖动</span>
+      </button>
       <div class="mmwf-count" title="累计功德">
         <span class="mmwf-count-label">功德</span>
         <strong id="mmwf-count">0</strong>
       </div>
       <button id="mmwf-fish" class="mmwf-fish" type="button" aria-label="敲木鱼，功德加一">
+        <span class="mmwf-aura" aria-hidden="true"></span>
+        <span class="mmwf-fish-base" aria-hidden="true"></span>
         <span class="mmwf-fish-body" aria-hidden="true">
           <span class="mmwf-hole"></span>
+          <span class="mmwf-shine"></span>
           <span class="mmwf-ring mmwf-ring-one"></span>
           <span class="mmwf-ring mmwf-ring-two"></span>
         </span>
@@ -24,7 +30,6 @@
         <span class="mmwf-mallet" aria-hidden="true"></span>
       </button>
       <div class="mmwf-actions">
-        <button id="mmwf-voice" class="mmwf-small-button" type="button" title="切换语音">语音：开</button>
         <button id="mmwf-reset" class="mmwf-small-button" type="button" title="清零累计功德">清零</button>
       </div>
     </section>
