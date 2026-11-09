@@ -1,0 +1,21 @@
+{
+  "name": "dsh-wooden-fish",
+  "version": "1.2.0",
+  "description": "DSH 桌面端木鱼挂件：今日与总计功德、敲击音效、静音、拖动定位、明暗主题同步",
+  "type": "module",
+  "license": "MIT",
+  "keywords": ["dsh-plugin", "wooden-fish", "overlay"],
+  "repository": { "type": "git", "url": "git+https://github.com/dbnody/dsh-wooden-fish.git" },
+  "files": ["src/", "cordis.patch.yml", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "main": "src/index.js",
+  "exports": { ".": "./src/index.js", "./client": "./src/client.js", "./package.json": "./package.json" },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": { "inject": ["@deepseek-ai/dsh-client-runtime"], "platform": "web" }
+  },
+  "scripts": {
+    "build": "node tools/build-client.mjs",
+    "check": "node --check app.js && node --check src/index.js && node --check src/client.js"
+  }
+}
